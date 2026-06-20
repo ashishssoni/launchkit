@@ -1,5 +1,7 @@
 # LaunchKit Architecture
 
+![Architecture Diagram](../assets/architecture.svg)
+
 ## Goal
 
 LaunchKit is a multi-tenant SaaS backend starter intended for portfolio and freelance positioning.
