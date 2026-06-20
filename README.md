@@ -123,6 +123,80 @@ npm run dev
 - `POST /api/api-keys`
 - `DELETE /api/api-keys/:workspaceId/:keyId`
 
+## API walkthrough
+
+### Register a workspace owner
+
+```bash
+curl -X POST http://localhost:3000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "founder@launchkit.dev",
+    "password": "StrongPass123!",
+    "fullName": "Ashish Soni",
+    "workspaceName": "LaunchKit Labs"
+  }'
+```
+
+### Login and get tokens
+
+```bash
+curl -X POST http://localhost:3000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "founder@launchkit.dev",
+    "password": "StrongPass123!"
+  }'
+```
+
+### Create a Stripe checkout session
+
+```bash
+curl -X POST http://localhost:3000/api/billing/checkout-session \
+  -H "Authorization: Bearer <access-token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "workspaceId": "<workspace-id>",
+    "plan": "PRO"
+  }'
+```
+
+### Create an API key
+
+```bash
+curl -X POST http://localhost:3000/api/api-keys \
+  -H "Authorization: Bearer <access-token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "workspaceId": "<workspace-id>",
+    "name": "Production Integration Key"
+  }'
+```
+
+## Sample response
+
+```json
+{
+  "message": "Workspace owner registered successfully",
+  "user": {
+    "id": "cm_user_123",
+    "email": "founder@launchkit.dev",
+    "fullName": "Ashish Soni"
+  },
+  "workspace": {
+    "id": "cm_workspace_123",
+    "name": "LaunchKit Labs",
+    "slug": "launchkit-labs",
+    "role": "OWNER",
+    "plan": "FREE"
+  },
+  "session": {
+    "accessToken": "<jwt-access-token>",
+    "refreshToken": "<jwt-refresh-token>"
+  }
+}
+```
+
 ## What this demonstrates
 
 LaunchKit is designed to signal the backend skills clients usually hire for:
