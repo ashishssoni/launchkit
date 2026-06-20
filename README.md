@@ -99,7 +99,13 @@ docker compose up -d
 npx prisma generate
 ```
 
-### 5. Run the API
+### 5. Seed demo data
+
+```bash
+npm run db:seed
+```
+
+### 6. Run the API
 
 ```bash
 npm run dev
@@ -172,6 +178,14 @@ curl -X POST http://localhost:3000/api/api-keys \
     "name": "Production Integration Key"
   }'
 ```
+
+## Demo accounts
+
+After seeding, use these accounts in Swagger or API tests:
+
+- **Founder:** `founder@launchkit.dev` / `StrongPass123!`
+- **Admin:** `admin@launchkit.dev` / `AdminPass123!`
+- **Member:** `member@launchkit.dev` / `MemberPass123!`
 
 ## Sample response
 
