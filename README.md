@@ -123,52 +123,33 @@ npm run dev
 - `POST /api/api-keys`
 - `DELETE /api/api-keys/:workspaceId/:keyId`
 
-## Roadmap
+## What this demonstrates
 
-### Phase 1 — Foundation
-- [x] Professional single-service structure
-- [x] NestJS API bootstrap
-- [x] Swagger setup
-- [x] Docker services
-- [x] Seed portfolio endpoints
+LaunchKit is designed to signal the backend skills clients usually hire for:
 
-### Phase 2 — SaaS Core
-- [x] Prisma models for users, workspaces, memberships
-- [x] JWT auth + refresh tokens
-- [x] workspace guards
-- [x] RBAC/permissions
-- [ ] request-scoped tenant context
+- designing a clean SaaS-ready backend architecture
+- implementing secure authentication and session handling
+- structuring multi-tenant products with workspace isolation
+- enforcing RBAC for sensitive business operations
+- integrating Stripe subscriptions and webhook flows
+- managing API credentials for external integrations
+- recording auditable security and billing events
+- building maintainable NestJS services that teams can extend
 
-### Phase 3 — Revenue + operations
-- [x] Stripe checkout session scaffold
-- [x] Stripe webhook endpoint scaffold
-- [x] Stripe customer creation and subscription sync foundation
-- [ ] billing portal
-- [ ] usage metering
-- [x] API keys
-- [x] persistent audit logs
+## Ideal use cases
 
-### Phase 4 — Premium signals
-- [ ] BullMQ jobs
-- [ ] websocket notifications
-- [ ] tests
-- [ ] CI
-- [ ] deployment guide
+LaunchKit is a strong fit for projects like:
 
-## Portfolio value
+- SaaS MVPs
+- subscription-based platforms
+- AI SaaS backends
+- internal admin systems
+- B2B products with roles and permissions
+- startup products needing billing, auth, and tenant architecture
 
-LaunchKit is meant to show that you can design and build a backend system that is:
+## Documentation
 
-- modular
-- scalable
-- SaaS-ready
-- production-oriented
-- easy for teams to extend
-
-## Push to GitHub
-
-```bash
-git init
-git add .
-git commit -m "feat: initialize LaunchKit NestJS SaaS backend starter"
-```
+- `docs/architecture.md` — system design overview
+- `docs/api-showcase.md` — portfolio-ready API flows
+- `docs/stripe-billing.md` — Stripe billing and webhook design
+- `docs/roadmap.md` — future expansion ideas
