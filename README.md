@@ -248,11 +248,18 @@ LaunchKit is a strong fit for projects like:
 
 ## Documentation
 
-- `docs/architecture.md` — system design overview
+LaunchKit now includes a more complete documentation set for technical review, client presentation, and architecture discussion.
+
+- `docs/index.md` — documentation index
+- `docs/architecture.md` — full system architecture
+- `docs/hld.md` — high-level design
+- `docs/lld.md` — low-level design
+- `docs/data-model.md` — entity and relationship model
+- `docs/request-flows.md` — key request and business flows
 - `docs/api-showcase.md` — portfolio-ready API flows
 - `docs/stripe-billing.md` — Stripe billing and webhook design
 - `docs/ci.md` — GitHub Actions workflow overview
 - `docs/demo-data.md` — demo accounts and seeded records
 - `docs/github-launch-checklist.md` — GitHub setup checklist
-- `docs/social-preview.md` — social preview guidance (use PNG for GitHub social preview)
+- `docs/social-preview.md` — social preview guidance
 - `docs/roadmap.md` — future expansion ideas
