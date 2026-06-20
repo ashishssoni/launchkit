@@ -1,0 +1,125 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum WorkspacePlan {
+  FREE
+  PRO
+  TEAM
+}
+
+enum WorkspaceRole {
+  OWNER
+  ADMIN
+  MEMBER
+  BILLING_MANAGER
+}
+
+enum SubscriptionStatus {
+  TRIALING
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  INCOMPLETE
+}
+
+enum AuditActorType {
+  USER
+  SYSTEM
+  API_KEY
+}
+
+model User {
+  id            String       @id @default(cuid())
+  email         String       @unique
+  fullName      String
+  passwordHash     String?
+  refreshTokenHash String?
+  emailVerified    Boolean      @default(false)
+  lastLoginAt   DateTime?
+  memberships   Membership[]
+  apiKeys       ApiKey[]
+  auditLogs     AuditLog[]   @relation("AuditActorUser")
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}
+
+model Workspace {
+  id                String         @id @default(cuid())
+  name              String
+  slug              String         @unique
+  plan              WorkspacePlan  @default(FREE)
+  stripeCustomerId  String?        @unique
+  subscription      Subscription?
+  memberships       Membership[]
+  auditLogs         AuditLog[]
+  apiKeys           ApiKey[]
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+}
+
+model Membership {
+  id          String        @id @default(cuid())
+  userId      String
+  workspaceId String
+  role        WorkspaceRole @default(MEMBER)
+  invitedById String?
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace   Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, workspaceId])
+  @@index([workspaceId, role])
+}
+
+model Subscription {
+  id                   String             @id @default(cuid())
+  workspaceId          String             @unique
+  stripeSubscriptionId String?            @unique
+  stripePriceId        String?
+  status               SubscriptionStatus @default(TRIALING)
+  currentPeriodStart   DateTime?
+  currentPeriodEnd     DateTime?
+  cancelAtPeriodEnd    Boolean            @default(false)
+  workspace            Workspace          @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+}
+
+model ApiKey {
+  id           String      @id @default(cuid())
+  workspaceId  String
+  createdById  String
+  name         String
+  prefix       String      @unique
+  secretHash   String
+  lastUsedAt   DateTime?
+  revokedAt    DateTime?
+  workspace    Workspace   @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  createdBy    User        @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  createdAt    DateTime    @default(now())
+
+  @@index([workspaceId])
+}
+
+model AuditLog {
+  id           String         @id @default(cuid())
+  workspaceId  String
+  actorUserId  String?
+  actorType    AuditActorType @default(USER)
+  action       String
+  entityType   String
+  entityId     String?
+  ipAddress    String?
+  metadata     Json?
+  workspace    Workspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  actorUser    User?          @relation("AuditActorUser", fields: [actorUserId], references: [id], onDelete: SetNull)
+  createdAt    DateTime       @default(now())
+
+  @@index([workspaceId, createdAt])
+  @@index([action])
+}
