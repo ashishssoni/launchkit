@@ -2,7 +2,16 @@
 
 > Production-ready **NestJS SaaS backend starter** with **Auth, Multi-Tenancy, RBAC, Stripe Billing, API Keys, Audit Logs, and Workspace Notifications**.
 
-![LaunchKit Architecture](./assets/architecture.svg)
+```mermaid
+flowchart LR
+    A[Clients\nWeb App / Admin / Integrations] --> B[LaunchKit API\nNestJS + Fastify + Swagger]
+    B --> C[Auth\nJWT + Refresh Tokens]
+    B --> D[Workspaces + RBAC]
+    B --> E[Billing\nStripe Checkout + Webhooks]
+    B --> F[API Keys + Audit Logs]
+    B --> G[(PostgreSQL)]
+    B --> H[(Redis)]
+```
 
 LaunchKit is built to showcase the exact backend capabilities startup founders and freelance clients usually need in a modern SaaS product.
 
@@ -245,5 +254,5 @@ LaunchKit is a strong fit for projects like:
 - `docs/ci.md` — GitHub Actions workflow overview
 - `docs/demo-data.md` — demo accounts and seeded records
 - `docs/github-launch-checklist.md` — GitHub setup checklist
-- `docs/social-preview.md` — social preview guidance
+- `docs/social-preview.md` — social preview guidance (use PNG for GitHub social preview)
 - `docs/roadmap.md` — future expansion ideas

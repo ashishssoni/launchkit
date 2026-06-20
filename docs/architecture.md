@@ -1,6 +1,15 @@
 # LaunchKit Architecture
 
-![Architecture Diagram](../assets/architecture.svg)
+```mermaid
+flowchart LR
+    A[Clients] --> B[LaunchKit API]
+    B --> C[Auth]
+    B --> D[Workspaces / Memberships / RBAC]
+    B --> E[Billing / Stripe Webhooks]
+    B --> F[API Keys / Audit Logs / Notifications]
+    B --> G[(PostgreSQL)]
+    B --> H[(Redis)]
+```
 
 ## Goal
 
