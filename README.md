@@ -28,9 +28,9 @@ LaunchKit is built to showcase the exact backend capabilities startup founders a
 
 ## Why this structure is professional
 
-This repository uses a **single-service backend layout** because LaunchKit is your flagship API project.
+This repository now showcases a **single product repo** with both the backend and a lightweight frontend demo.
 
-Instead of a noisy monorepo, it keeps everything focused and client-friendly:
+The backend remains the primary foundation, and the frontend exists to help clients instantly visualize the SaaS result:
 
 ```bash
 launchkit/
@@ -46,16 +46,21 @@ launchkit/
       audit/
     app.module.ts
     main.ts
+  apps/
+    web/
+      app/
+      components/
+      package.json
   prisma/
   docs/
-  test/
+  portfolio-assets/
   docker-compose.yml
   .env.example
   package.json
   tsconfig.json
 ```
 
-This looks cleaner on GitHub and is easier for clients to understand quickly.
+This makes LaunchKit stronger as a portfolio project because it now shows both the backend architecture and the visible SaaS/admin experience.
 
 ## Tech stack
 
@@ -78,11 +83,13 @@ This looks cleaner on GitHub and is easier for clients to understand quickly.
 - **Notifications** — authenticated workspace event feed
 - **Audit** — RBAC-protected audit trails
 - **API Keys** — creation, listing, and revocation flows
+- **Frontend Demo** — polished Next.js admin UI for dashboard, billing, API keys, audit logs, notifications, and workspace settings
 
 ## API preview
 
 - API base: `http://localhost:3000/api`
 - Swagger docs: `http://localhost:3000/docs`
+- Frontend demo: `http://localhost:3001`
 
 ## Getting started
 
@@ -121,6 +128,16 @@ npm run db:seed
 ```bash
 npm run dev
 ```
+
+### 7. Run the frontend demo
+
+```bash
+cd apps/web
+npm install
+npm run dev
+```
+
+The frontend will run at `http://localhost:3001` by default when started separately.
 
 ## Example endpoints
 
@@ -189,6 +206,23 @@ curl -X POST http://localhost:3000/api/api-keys \
     "name": "Production Integration Key"
   }'
 ```
+
+## Frontend screenshots
+
+### Landing page
+![LaunchKit Landing](./screenshots/01-landing.png)
+
+### Dashboard
+![LaunchKit Dashboard](./screenshots/02-dashboard.png)
+
+### Billing
+![LaunchKit Billing](./screenshots/03-billing.png)
+
+### API Keys
+![LaunchKit API Keys](./screenshots/04-api-keys.png)
+
+### Audit Logs
+![LaunchKit Audit Logs](./screenshots/05-audit-logs.png)
 
 ## Demo accounts
 
